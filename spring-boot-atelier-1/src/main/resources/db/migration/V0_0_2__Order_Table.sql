@@ -1,0 +1,1 @@
+create table purchase_order (id integer not null auto_increment, date datetime, primary key (id));
