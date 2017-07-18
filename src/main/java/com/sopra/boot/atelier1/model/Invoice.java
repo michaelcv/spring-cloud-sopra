@@ -6,6 +6,10 @@ public class Invoice {
 	private int id;
 	private Date datetime;
 
+	public Invoice() {
+
+	}
+
 	public Invoice(int id, Date datetime) {
 		this.id = id;
 		this.datetime = datetime;
