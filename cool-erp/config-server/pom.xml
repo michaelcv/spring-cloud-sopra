@@ -43,7 +43,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>config-server</finalName>
+		<finalName>sopra-config-server</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
