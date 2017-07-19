@@ -14,7 +14,7 @@ public class Atelier1Application {
 	public static void main(String[] args) {
 		DiscoveryClient dicoveryClient = SpringApplication.run(Atelier1Application.class, args)
 				.getBean(DiscoveryClient.class);
-
+		
 		dicoveryClient.getServices().stream().forEach(service -> System.out.print(service));
 	}
 
