@@ -2,7 +2,7 @@ version : '2'
 
 services:
   eureka:
-    image: daniellavoie/sopra-eureka:staging
+    image: daniellavoie/sopra-eureka-server:staging
     environment:
       - SPRING_PROFILES_ACTIVE=staging
       - MANAGEMENT_SECURITY_ENABLED=false
