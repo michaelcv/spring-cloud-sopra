@@ -14,47 +14,12 @@ node {
         stage("Build Config Server") {
             sh "mvn -f cool-erp/config-server/pom.xml clean install"
         }
-
-        stage("Build Product Service") {
-            sh "mvn -f cool-erp/product/pom.xml clean install"
-        }
-
-        stage("Build Inventory Service") {
-            sh "mvn -f cool-erp/inventory/pom.xml clean install"
-        }
-
-        stage("Build Purchase Order Service") {
-            sh "mvn -f cool-erp/purchase-order/pom.xml clean install"
-        }
-
-        stage("Build Reception Service") {
-            sh "mvn -f cool-erp/reception/pom.xml clean install"
-        }
-
-        stage("Build Sale Service") {
-            sh "mvn -f cool-erp/sale/pom.xml clean install"
-        }
-
-        stage("Build Shipping Service") {
-            sh "mvn -f cool-erp/shipping/pom.xml clean install"
-        }
-
-        stage("Build Zuul Proxy") {
-            sh "mvn -f cool-erp/zuul-proxy/pom.xml clean install"
-        }
     }
 
     stage('Build docker images'){
         docker.withServer("unix:///var/run/docker.sock") {
             docker.build("daniellavoie/sopra-eureka-server", "cool-erp/eureka-server")
             docker.build("daniellavoie/sopra-config-server", "cool-erp/config-server")
-            docker.build("daniellavoie/sopra-product", "cool-erp/product")
-            docker.build("daniellavoie/sopra-inventory", "cool-erp/inventory")
-            docker.build("daniellavoie/sopra-purchase-order", "cool-erp/purchase-order")
-            docker.build("daniellavoie/sopra-reception", "cool-erp/reception")
-            docker.build("daniellavoie/sopra-sale", "cool-erp/sale")
-            docker.build("daniellavoie/sopra-shipping", "cool-erp/shipping")
-            docker.build("daniellavoie/sopra-zuul-proxy", "cool-erp/zuul-proxy")
         }
     }
 
