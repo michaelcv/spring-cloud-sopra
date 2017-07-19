@@ -25,9 +25,9 @@ node {
 
     stage('Deploy Staging environment') {
         try {
-            sh "/usr/local/bin/docker-compose -f cool-erp/docker-compose/staging/docker-compose.yml down"
+            sh "/usr/local/bin/docker-compose -f cool-erp/docker-compose/coolerp-staging/docker-compose.yml down"
         } catch(e){ }
 
-        sh "/usr/local/bin/docker-compose -f cool-erp/docker-compose/staging/docker-compose.yml up -d"
+        sh "/usr/local/bin/docker-compose -f cool-erp/docker-compose/coolerp-staging/docker-compose.yml up -d"
     }
 }
