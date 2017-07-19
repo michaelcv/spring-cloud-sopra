@@ -1,8 +1,8 @@
 package com.sopra.cloud.invoiceserviceclient.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -16,6 +16,7 @@ import com.sopra.cloud.invoiceserviceclient.InvoiceClientRestImpl;
 @Import({ InvoiceClientDiscoveryConfig.class })
 public class InvoiceClientAutoConfiguration {
 	@Bean
+	@LoadBalanced
 	@ConditionalOnMissingBean(value = RestTemplate.class)
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
@@ -23,8 +24,8 @@ public class InvoiceClientAutoConfiguration {
 
 	@Bean
 	@ConditionalOnProperty(name = "invoice.service.mock", havingValue = "false", matchIfMissing = true)
-	public InvoiceClient invoiceClientRestImpl(@Value("${invoice.service.url:http://localhost:8080}") String url) {
-		return new InvoiceClientRestImpl(url, restTemplate());
+	public InvoiceClient invoiceClientRestImpl() {
+		return new InvoiceClientRestImpl(restTemplate());
 	}
 
 	@Bean
