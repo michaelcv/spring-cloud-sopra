@@ -9,7 +9,8 @@ services:
       - ON_CREATE_DB=`sopra-staging`
     ports:
       - "3306"
-  suul-proxy:
+      
+  zuul-proxy:
     image: daniellavoie/sopra-zuul-proxy:staging
     environment:
       - SPRING_PROFILES_ACTIVE=staging
@@ -24,6 +25,7 @@ services:
     networks:
       - traefik
       - default
+
   eureka:
     image: daniellavoie/sopra-eureka:staging
     environment:
@@ -36,36 +38,46 @@ services:
       - "traefik.frontend.rule=Host:staging.sopra.eureka.cspinformatique.com"
       - "traefik.port=8761"
       - "traefik.docker.network=traefik_default"
+    networks:
+      - traefik
+      - default
+
   config-server:
     image: daniellavoie/sopra-config-server:staging
     environment:
       - SPRING_PROFILES_ACTIVE=staging
       - MANAGEMENT_SECURITY_ENABLED=false
+
   product:
     image: daniellavoie/sopra-product:staging
     environment:
       - SPRING_PROFILES_ACTIVE=staging
       - MANAGEMENT_SECURITY_ENABLED=false
+
   inventory:
     image: daniellavoie/sopra-inventory:staging
     environment:
       - SPRING_PROFILES_ACTIVE=staging
       - MANAGEMENT_SECURITY_ENABLED=false
+
   purchase-order:
     image: daniellavoie/sopra-purchase-order:staging
     environment:
       - SPRING_PROFILES_ACTIVE=staging
       - MANAGEMENT_SECURITY_ENABLED=false
+
   reception:
     image: daniellavoie/sopra-reception:staging
     environment:
       - SPRING_PROFILES_ACTIVE=staging
       - MANAGEMENT_SECURITY_ENABLED=false
+
   sale:
     image: daniellavoie/sopra-sale:staging
     environment:
       - SPRING_PROFILES_ACTIVE=staging
       - MANAGEMENT_SECURITY_ENABLED=false
+
   shipping:
     image: daniellavoie/sopra-shipping:staging
     environment:
