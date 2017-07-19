@@ -31,7 +31,13 @@ public class InvoiceController {
 
 	@GetMapping
 	public List<Invoice> findAll() throws InterruptedException {
-		return invoiceService.findAll();
+		LOGGER.info("Loading invoices.");
+
+		List<Invoice> invoices = invoiceService.findAll();
+
+		LOGGER.info("Loaded invoices.");
+
+		return invoices;
 	}
 
 }
