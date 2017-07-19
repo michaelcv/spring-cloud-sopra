@@ -23,4 +23,7 @@ services:
       - SPRING_PROFILES_ACTIVE=staging
       - MANAGEMENT_SECURITY_ENABLED=false
 
-networks.traefik.external.name: traefik_default
+networks:
+  traefik:
+    external:
+      name: traefik_default
