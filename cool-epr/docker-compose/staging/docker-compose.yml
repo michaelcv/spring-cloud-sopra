@@ -1,0 +1,75 @@
+version : '2'
+
+services:
+  sopra-mysql:
+    image: tutum/mysql
+    environment:
+      - MYSQL_PASS=sopra
+      - MYSQL_USER=sopra
+      - ON_CREATE_DB=`sopra-staging`
+    ports:
+      - "3306"
+  suul-proxy:
+    image: daniellavoie/sopra-zuul-proxy:staging
+    environment:
+      - SPRING_PROFILES_ACTIVE=staging
+      - MANAGEMENT_SECURITY_ENABLED=false
+    ports:
+      - "8080"
+    labels:
+      - "traefik.backend=staging-sopra"
+      - "traefik.frontend.rule=Host:staging.sopra.cspinformatique.com"
+      - "traefik.port=8080"
+      - "traefik.docker.network=traefik_default"
+    networks:
+      - traefik
+      - default
+  eureka:
+    image: daniellavoie/sopra-eureka:staging
+    environment:
+      - SPRING_PROFILES_ACTIVE=staging
+      - MANAGEMENT_SECURITY_ENABLED=false
+    ports:
+      - "8761"
+    labels:
+      - "traefik.backend=staging-sopra-eureka"
+      - "traefik.frontend.rule=Host:staging.sopra.eureka.cspinformatique.com"
+      - "traefik.port=8761"
+      - "traefik.docker.network=traefik_default"
+  config-server:
+    image: daniellavoie/sopra-config-server:staging
+    environment:
+      - SPRING_PROFILES_ACTIVE=staging
+      - MANAGEMENT_SECURITY_ENABLED=false
+  product:
+    image: daniellavoie/sopra-product:staging
+    environment:
+      - SPRING_PROFILES_ACTIVE=staging
+      - MANAGEMENT_SECURITY_ENABLED=false
+  inventory:
+    image: daniellavoie/sopra-inventory:staging
+    environment:
+      - SPRING_PROFILES_ACTIVE=staging
+      - MANAGEMENT_SECURITY_ENABLED=false
+  purchase-order:
+    image: daniellavoie/sopra-purchase-order:staging
+    environment:
+      - SPRING_PROFILES_ACTIVE=staging
+      - MANAGEMENT_SECURITY_ENABLED=false
+  reception:
+    image: daniellavoie/sopra-reception:staging
+    environment:
+      - SPRING_PROFILES_ACTIVE=staging
+      - MANAGEMENT_SECURITY_ENABLED=false
+  sale:
+    image: daniellavoie/sopra-sale:staging
+    environment:
+      - SPRING_PROFILES_ACTIVE=staging
+      - MANAGEMENT_SECURITY_ENABLED=false
+  shipping:
+    image: daniellavoie/sopra-shipping:staging
+    environment:
+      - SPRING_PROFILES_ACTIVE=staging
+      - MANAGEMENT_SECURITY_ENABLED=false
+
+networks.traefik.external.name: traefik_default
