@@ -17,9 +17,17 @@ node {
     }
 
     stage('Build docker images'){
+
         docker.withServer("unix:///var/run/docker.sock") {
             docker.build("daniellavoie/sopra-eureka-server", "cool-erp/eureka-server")
             docker.build("daniellavoie/sopra-config-server", "cool-erp/config-server")
+
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'github-daniellavoie', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                sh "docker login --password=${PASSWORD} --username=${USERNAME}"
+
+                sh "docker tag ${USERNAME}/sopra-eureka-server ${USERNAME}/sopra-eureka-server:staging"
+                sh "docker tag ${USERNAME}/sopra-config-server ${USERNAME}/sopra-config-server:staging"
+            }
         }
     }
 
