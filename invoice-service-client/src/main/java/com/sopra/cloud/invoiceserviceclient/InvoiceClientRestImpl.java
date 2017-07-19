@@ -28,5 +28,4 @@ public class InvoiceClientRestImpl implements InvoiceClient {
 				.exchange(url + "/invoice", HttpMethod.GET, null, new ParameterizedTypeReference<List<Invoice>>() {
 				}).getBody();
 	}
-
 }

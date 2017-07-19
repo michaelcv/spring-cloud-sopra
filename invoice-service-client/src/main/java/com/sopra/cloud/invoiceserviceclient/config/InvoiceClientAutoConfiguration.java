@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
 
 import com.sopra.cloud.invoiceserviceclient.InvoiceClient;
@@ -12,6 +13,7 @@ import com.sopra.cloud.invoiceserviceclient.InvoiceClientJsonMock;
 import com.sopra.cloud.invoiceserviceclient.InvoiceClientRestImpl;
 
 @Configuration
+@Import({ InvoiceClientDiscoveryConfig.class })
 public class InvoiceClientAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean(value = RestTemplate.class)
