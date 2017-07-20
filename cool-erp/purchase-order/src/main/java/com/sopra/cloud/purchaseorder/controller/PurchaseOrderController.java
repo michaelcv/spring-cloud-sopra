@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.sopra.cloud.purchaseorder.model.PurchaseOrder;
 import com.sopra.cloud.purchaseorder.service.PurchaseOrderService;
@@ -15,8 +16,11 @@ public class PurchaseOrderController {
 
     private PurchaseOrderService purchaseOrderService;
 
-    public PurchaseOrderController(PurchaseOrderService pPurchaseOrderReceived) {
+    private RestTemplate restTemplate;
+
+    public PurchaseOrderController(PurchaseOrderService pPurchaseOrderReceived, RestTemplate pRestTemplate) {
         purchaseOrderService = pPurchaseOrderReceived;
+        restTemplate = pRestTemplate;
     }
 
     @PatchMapping(value = "/{purchaseOrderId}")
@@ -33,6 +37,8 @@ public class PurchaseOrderController {
     @PostMapping(value = "/")
     public PurchaseOrder createPurchaseOrder(PurchaseOrder pPurchaseOrder) {
         /* 1. Check product exists. */
+        // Product product = restTemplate.exchange("/product-service/" +
+        // pPurchaseOrder.getProductId(), HttpMethod.GET, null,.get();
 
         /* 2. Create purchase order. */
         PurchaseOrder createdPurchaseOrder = purchaseOrderService.createPurchaseOrder(pPurchaseOrder);

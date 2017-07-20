@@ -79,6 +79,7 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>purchase-order</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
