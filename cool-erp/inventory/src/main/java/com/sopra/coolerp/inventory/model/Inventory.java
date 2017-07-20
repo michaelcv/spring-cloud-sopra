@@ -1,5 +1,9 @@
 package com.sopra.coolerp.inventory.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Inventory {
 	private long productId;
 	private double onHand;
@@ -15,6 +19,7 @@ public class Inventory {
 		this.onHold = onHold;
 	}
 
+	@Id
 	public long getProductId() {
 		return productId;
 	}
