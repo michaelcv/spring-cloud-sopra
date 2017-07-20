@@ -1,4 +1,4 @@
-package com.sopra.coolerp.sale.application;
+package com.sopra.coolerp.sale;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
