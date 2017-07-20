@@ -53,6 +53,6 @@
     </dependency>
   </dependencies>
   <build>
-  	<finaleName>sopra-sale-service.jar</finaleName>
+  	<finalName>sopra-sale-service</finalName>
   </build>
 </project>
