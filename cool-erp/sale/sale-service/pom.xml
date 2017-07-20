@@ -34,6 +34,10 @@
 	</dependencyManagement>
 
   <dependencies>
+  		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
@@ -54,5 +58,11 @@
   </dependencies>
   <build>
   	<finalName>sopra-sale-service</finalName>
+	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+		</plugin>
+	</plugins>
   </build>
 </project>
