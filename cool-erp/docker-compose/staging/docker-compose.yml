@@ -6,6 +6,13 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=staging
       - MANAGEMENT_SECURITY_ENABLED=false
+      
+  shipping:
+    image: daniellavoie/sopra-shipping:staging
+    environment:
+      - SPRING_PROFILES_ACTIVE=staging
+      - MANAGEMENT_SECURITY_ENABLED=false
+
   purchase-order:
     image: daniellavoie/sopra-purchase-order:staging
     environment:
