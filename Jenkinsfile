@@ -15,12 +15,13 @@ node {
             sh "mvn -f cool-erp/shipping/pom.xml clean install"
         }
 
-        stage("Build Reception Service") {
+        stage("Build Purchase Order Service") {
             sh "mvn -f cool-erp/purchase-order/pom.xml clean install"
         }
 
-	stage("Build Inventory Service") {
-            sh "mvn -f cool-erp/inventory/pom.xml clean install"
+        stage("Build Inventory Service") {
+                sh "mvn -f cool-erp/inventory/pom.xml clean install"
+            }
         }
     }
 
@@ -29,7 +30,7 @@ node {
             docker.build("daniellavoie/sopra-reception", "cool-erp/reception")
             docker.build("daniellavoie/sopra-shipping", "cool-erp/shipping")
             docker.build("daniellavoie/sopra-purchase-order", "cool-erp/purchase-order")
-	    docker.build("daniellavoie/sopra-inventory", "cool-erp/inventory")
+	        docker.build("daniellavoie/sopra-inventory", "cool-erp/inventory")
 
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'github-daniellavoie', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                 sh "docker login --password=${PASSWORD} --username=${USERNAME}"
