@@ -20,8 +20,7 @@ node {
         }
 
         stage("Build Inventory Service") {
-                sh "mvn -f cool-erp/inventory/pom.xml clean install"
-            }
+            sh "mvn -f cool-erp/inventory/pom.xml clean install"
         }
     }
 
