@@ -48,4 +48,8 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<finalName>sopra-inventory</finalName>
+	</build>
 </project>
