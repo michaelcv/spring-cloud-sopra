@@ -93,13 +93,13 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>sopra-shipping</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-	 <finalName>sopra-shipping</finalName>
 	</build>
 
 

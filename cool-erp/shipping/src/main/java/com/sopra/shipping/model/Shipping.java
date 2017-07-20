@@ -12,6 +12,16 @@ public class Shipping {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+    
+    private int saleId;
+
+	public int getSaleId() {
+		return saleId;
+	}
+
+	public void setSaleId(int saleId) {
+		this.saleId = saleId;
+	}
 
 	public int getId() {
 		return this.id;
