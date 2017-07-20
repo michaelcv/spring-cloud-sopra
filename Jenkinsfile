@@ -10,16 +10,26 @@ node {
         stage("Build Reception Service") {
             sh "mvn -f cool-erp/reception/pom.xml clean install"
         }
+        
+          stage("Build Reception Service") {
+            sh "mvn -f cool-erp/reception/pom.xml clean install"
+        }
+        
+         stage("Build Shipping Service") {
+            sh "mvn -f cool-erp/shipping/pom.xml clean install"
+        }
     }
 
     stage('Build docker images'){
         docker.withServer("unix:///var/run/docker.sock") {
             docker.build("daniellavoie/sopra-reception", "cool-erp/reception")
+            docker.build("daniellavoie/sopra-shipping", "cool-erp/shipping")
 
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'github-daniellavoie', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                 sh "docker login --password=${PASSWORD} --username=${USERNAME}"
 
                 sh "docker tag ${USERNAME}/sopra-reception ${USERNAME}/sopra-reception:staging"
+                sh "docker tag ${USERNAME}/sopra-reception ${USERNAME}/sopra-shipping:staging"
             }
         }
     }
