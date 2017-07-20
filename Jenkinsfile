@@ -7,27 +7,22 @@ node {
             checkout scm
         }
 
-        stage("Build Eureka Server") {
-            sh "mvn -f cool-erp/eureka-server/pom.xml clean install"
-        }
-
-        stage("Build Config Server") {
-            sh "mvn -f cool-erp/config-server/pom.xml clean install"
+        stage("Build Reception Service") {
+            sh "mvn -f cool-erp/reception/pom.xml clean install"
         }
     }
 
     stage('Build docker images'){
         docker.withServer("unix:///var/run/docker.sock") {
-            docker.build("daniellavoie/sopra-eureka-server", "cool-erp/eureka-server")
-            docker.build("daniellavoie/sopra-config-server", "cool-erp/config-server")
+            docker.build("daniellavoie/sopra-reception", "cool-erp/reception")
         }
     }
 
     stage('Deploy Staging environment') {
         try {
-            sh "/usr/local/bin/docker-compose -f cool-epr/docker-compose/staging/docker-compose.yml down"
+            sh "/usr/local/bin/docker-compose -f cool-erp/docker-compose/staging/docker-compose.yml down"
         } catch(e){ }
 
-        sh "/usr/local/bin/docker-compose -f cool-epr/docker-compose/staging/docker-compose.yml up -d"
+        sh "/usr/local/bin/docker-compose -f cool-erp/docker-compose/staging/docker-compose.yml up -d"
     }
 }
