@@ -11,10 +11,6 @@ node {
             sh "mvn -f cool-erp/reception/pom.xml clean install"
         }
         
-          stage("Build Reception Service") {
-            sh "mvn -f cool-erp/reception/pom.xml clean install"
-        }
-        
          stage("Build Shipping Service") {
             sh "mvn -f cool-erp/shipping/pom.xml clean install"
         }
